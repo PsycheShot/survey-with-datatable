@@ -12,6 +12,15 @@
     },
     {
       "path": "./tsconfig.spec.json"
+<<<<<<< HEAD
     }
+=======
+    },
+    {
+      "compilerOptions": {
+        "types": ["node"]
+    }
+  }
+>>>>>>> repo-a/master
 ]
 }

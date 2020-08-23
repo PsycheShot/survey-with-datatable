@@ -3,7 +3,12 @@
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
     "outDir": "./out-tsc/app",
+<<<<<<< HEAD
     "types": []
+=======
+    "types": [ "node" ],
+    "typeRoots": [ "../node_modules/@types" ]
+>>>>>>> repo-a/master
   },
   "files": [
     "src/main.ts",
