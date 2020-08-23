@@ -19,7 +19,7 @@
                         <div *ngIf="f.password.errors.required">Please enter a password</div>
                     </div>
                 </div>
-                <button [disabled]="loading" class="btn btn-primary" (click)="check()" >
+                <button [disabled]="loading" class="btn btn-primary" (click)="onSubmit()" >
                     Submit
                 </button>
                 <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>

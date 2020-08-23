@@ -1,3 +1,4 @@
+import { User } from './../_models/user.model';
 import { Component, OnInit } from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 import { AuthenticationService } from './../_services/authentication.service';
@@ -13,9 +14,6 @@ import { first } from 'rxjs/operators';
 export class LginmodalComponent implements OnInit 
 {
 
-  check(){
-    this.router.navigate(['/admin']);
-  }
   
   loginForm: FormGroup;
   loading = false;
@@ -27,12 +25,12 @@ export class LginmodalComponent implements OnInit
       private route: ActivatedRoute,
       private router: Router,
       private authenticationService: AuthenticationService
-  ){} /* { 
+  ) { 
       // redirect to home if already logged in
       if (this.authenticationService.currentUserValue) { 
-          this.router.navigate(['/']);
+          this.router.navigate(['/admin']);
       }
-  } */
+  }
 
   ngOnInit() {
       this.loginForm = this.formBuilder.group({
@@ -58,7 +56,7 @@ export class LginmodalComponent implements OnInit
           .subscribe({
               next: () => {
                   // get return url from route parameters or default to '/'
-                  const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+                  const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/admin';
                   this.router.navigate([returnUrl]);
               },
               error: error => {
