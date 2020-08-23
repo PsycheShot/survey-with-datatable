@@ -34,6 +34,26 @@ export class QdbService {
 
   }
 
+  getRefByTopicid(tid:string):Observable<any[]>{
+    return this.http.get<any[]>(`${this.baseUrl}/qdataTID/${tid}`)
+  }
+
+  getOptByRefid(tid:string,refId:string):Observable<any[]>{
+    return this.http.get<any[]>(`${this.baseUrl}/qdata/${tid}/${refId}`)
+  }
+
+  getcount(tid:string,refid:string,mcqname:string):Observable<any[]>{
+    return this.http.get<any[]>(`${this.baseUrl}/surveydata/${tid}/${refid}/${mcqname}`)
+  }
+
+  getTopicId():Observable<any[]>{
+    return this.http.get<any[]>(`${this.baseUrl}/qdataTOPIC`)
+  }
+
+  getOptions(tid:string,ref:string,question:string):Observable<any[]>{
+    return this.http.get<any[]>(`${this.baseUrl}/qdataques/${tid}/${ref}/${question}`)
+  }
+
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.

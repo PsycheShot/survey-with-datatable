@@ -20,6 +20,8 @@
     "@angular/platform-browser-dynamic": "~10.0.6",
     "@angular/router": "~10.0.6",
     "bootstrap": "^4.5.2",
+    "default-passive-events": "^2.0.0",
+    "ng2-google-charts": "^6.1.0",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"
@@ -43,6 +45,5 @@
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
     "typescript": "~3.9.5"
-    
   }
 }

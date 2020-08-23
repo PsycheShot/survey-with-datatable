@@ -1,3 +1,4 @@
+import { LginmodalComponent } from './../lginmodal/lginmodal.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AdminComponent } from './admin.component';
@@ -11,8 +12,12 @@ const routes: Routes = [
       {
         path:'qcrud',
         component:QcrudComponent
-      }
+      },
     ]
+  },
+  {
+    path:'login',
+    component:LginmodalComponent
   }
 ];
 
