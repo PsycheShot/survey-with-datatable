@@ -1,0 +1,558 @@
+import { Component, OnInit } from '@angular/core';
+import { CommService } from '../comm.service'
+import { PageData } from '../shared/pagedata.model'
+import { McqData } from '../shared/mcqdata.model'
+import { RefData } from '../shared/refdata.model'
+import {RespData} from '../shared/respdata.model'
+import {Router} from '@angular/router';
+import {DbacessService} from '../db/dbacess.service'
+import { SurveyData } from '../shared/surveydata.model';
+@Component({
+  selector: 'app-page2',
+  templateUrl: './page2.component.html',
+  styleUrls: ['./page2.component.css']
+})
+export class Page2Component implements OnInit {
+
+  constructor(private commservice:CommService,private router:Router,private db:DbacessService) { }
+  q: McqData[];
+  q1: McqData[];
+  q2: McqData[];
+  q3:McqData[];
+  stq:string;
+  stq1:string;
+  stq2:string;
+  stq3:string;
+  ngOnInit(): void {
+    this.commservice.currentpage=3;
+    this.q = [{
+      textanswer: "User Text answer",
+      options: ["Satisfactory", "Needs Revamp", "New program to be implemented"],
+      allowtextanswer: false,
+      question: "Present Status in Karnataka",
+      answer: 0
+    },
+    {
+      textanswer: "User Text answer",
+      options: ["Administrative", "Pedagogical", "Other"],
+      allowtextanswer: false,
+      question: "Nature of Implication",
+      answer: 0
+    },
+    {
+      textanswer: "User Text answer",
+      options: ["Short Term", "Long Term"],
+      allowtextanswer: false,
+      question: "Implementation timeline",
+      answer: 0
+    }]
+    this.q1 = [{
+      textanswer: "User Text answer",
+      options: ["Satisfactory", "Needs Revamp", "New program to be implemented"],
+      allowtextanswer: false,
+      question: "Present Status in Karnataka",
+      answer: 0
+    },
+    {
+      textanswer: "User Text answer",
+      options: ["Administrative", "Pedagogical", "Other"],
+      allowtextanswer: false,
+      question: "Nature of Implication",
+      answer: 0
+    },
+    {
+      textanswer: "User Text answer",
+      options: ["Short Term", "Long Term"],
+      allowtextanswer: false,
+      question: "Implementation timeline",
+      answer: 0
+    }];
+    this.q2 = [{
+      textanswer: "User Text answer",
+      options: ["Satisfactory", "Needs Revamp", "New program to be implemented"],
+      allowtextanswer: false,
+      question: "Present Status in Karnataka",
+      answer: 0
+    },
+    {
+      textanswer: "User Text answer",
+      options: ["Administrative", "Pedagogical", "Other"],
+      allowtextanswer: false,
+      question: "Nature of Implication",
+      answer: 0
+    },
+    {
+      textanswer: "User Text answer",
+      options: ["Short Term", "Long Term"],
+      allowtextanswer: false,
+      question: "Implementation timeline",
+      answer: 0
+    }];
+
+    this.q3=[{
+      textanswer: "User Text answer",
+      options: ["Satisfactory", "Needs Revamp", "New program to be implemented"],
+      allowtextanswer: false,
+      question: "Present Status in Karnataka",
+      answer: 0
+    },
+    {
+      textanswer: "User Text answer",
+      options: ["Administrative", "Pedagogical", "Other"],
+      allowtextanswer: false,
+      question: "Nature of Implication",
+      answer: 0
+    },
+    {
+      textanswer: "User Text answer",
+      options: ["Short Term", "Long Term"],
+      allowtextanswer: false,
+      question: "Implementation timeline",
+      answer: 0
+    }
+
+    ]
+  }
+
+
+  kickdata() {
+    let resp1:RespData={
+      mcq:this.q,
+      suggestion:""
+    }
+    let resp2:RespData={
+      mcq:this.q1,
+      suggestion:""
+    }
+    let resp3:RespData={
+      mcq:this.q2,
+      suggestion:""
+    }
+    let resp4:RespData={
+      mcq:this.q3,
+      suggestion:""
+    }
+    let ref1: RefData = {
+      ref: "2.5",
+      descr: "An interim 3-month play-based ‘school preparation module’ for all Grade 1 students, consisting of activities and workbooks consisting components of foundational literacy and numeracy will be prepared",
+      response:resp1
+    };
+    let ref2: RefData = {
+      ref: "2.6",
+      descr: "A national repository of high-quality resources on foundational literacy and numeracy will be made available on the Digital Infrastructure for Knowledge Sharing (DIKSHA).",
+      response:resp2
+    }
+    let ref3:RefData={
+      ref: "2.7",
+      descr:"peer-tutoring will be introduced to promote foundational literacy and numeracy.",
+      response:resp3
+    }
+    let ref4:RefData={
+      ref: "2.9",
+      descr:"Children are provided simple but energizing breakfast in addition to midday meals. All school children shall undergo regular health check-ups especially for 100% immunization in schools and health cards will be issued to monitor the same.",
+      response:resp4
+    }
+    this.commservice.page2data={
+      topicid:"1002",
+      topicname:"Foundational Literacy and Numeracy (FLN)",
+      data:[ref1,ref2,ref3,ref4]
+    }
+    // let s=this.commservice.surveydata.length;
+    this.commservice.surveydata.survey.push(this.commservice.page2data);
+    console.log(this.commservice.surveydata)
+    this.db.dumpsurvey(this.commservice.surveydata).subscribe(
+      (data:SurveyData)=>{
+        console.log(data);
+      },
+      (error:any)=>console.log(error)
+    )
+    console.log("I think it worked");
+    this.commservice.currentpage=1;
+    this.router.navigate(['']);
+  }
+
+}
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+<div class="conatiner-fluid">
+    <div class="row">
+
+        <div class="col-lg-12 col-sm-12 col-md-12">
+            <div class="card text-center w-80">
+                <div class="card-body">
+                    <h5 class="card-title">Foundational Literacy and Numeracy </h5>
+
+                    <div class="jumbotron jumbotron-fluid">
+                        <div class="container">
+                            <h1 class="display-7">2.5</h1>
+                            <p class="lead">An interim 3-month play-based ‘school preparation module’ for all Grade 1
+                                students, consisting of activities and workbooks consisting components of foundational
+                                literacy and numeracy will be prepared</p>
+                        </div>
+                    </div>
+                    <div class="conatiner-fluid question mb-3">
+
+                        <h5 class="display-6 mt-2">1. Present status
+                            in Karnataka
+                        </h5>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" [name]="1" value=0 [(ngModel)]="q[0].answer">
+                            <label class="form-check-label" for="exampleRadios1">
+                                Satisfactory
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" [name]="1" value=1 [(ngModel)]="q[0].answer">
+                            <label class="form-check-label" for="exampleRadios1">
+                                Needs Revamp
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" [name]="1" value=2 [(ngModel)]="q[0].answer">
+                            <label class="form-check-label" for="exampleRadios1">
+                                New Program to be implemeted
+                            </label>
+                        </div>
+
+                        <h5 class="display-6 mt-2">2. Nature of implication
+                        </h5>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" [name]="2" value=0 [(ngModel)]="q[1].answer">
+                            <label class="form-check-label" for="exampleRadios1">
+                                Administrative
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" [name]="2" value=1 [(ngModel)]="q[1].answer">
+                            <label class="form-check-label" for="exampleRadios1">
+                                Pedagogical
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" [name]="2" value=2 [(ngModel)]="q[1].answer">
+                            <label class="form-check-label" for="exampleRadios1">
+                                Other
+                            </label>
+                        </div>
+
+                        <div *ngIf="q[1].answer==2">
+                            <div class="form-group">
+                                <textarea class="form-control"  rows="3" [(ngModel)]="q[1].textanswer"></textarea>
+                              </div>
+                        </div>
+
+                        <h5 class="display-6 mt-2">3. Implementation Timeline
+                        </h5>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" [name]="3" value=0 [(ngModel)]="q[2].answer">
+                            <label class="form-check-label" for="exampleRadios1">
+                                Short Term
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" [name]="3" value=1 [(ngModel)]="q[2].answer">
+                            <label class="form-check-label" for="exampleRadios1">
+                                Long Term
+                            </label>
+                        </div>
+
+                        <div class="form-group">
+                            <!-- <label for="exampleFormControlTextarea1">Suggestions</label> -->
+                            <h5 class="display-6 mt-2">4. Suggestions
+                            </h5>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" [(ngModel)]="stq"></textarea>
+                          </div>
+
+
+
+                    </div>
+                    <!-- <button class="btn btn-primary" type="submit" (click)="kickdata()">Submit form</button> -->
+                    <div class="jumbotron jumbotron-fluid">
+                        <div class="container">
+                            <h1 class="display-7">2.6</h1>
+                            <p class="lead">A national repository of high-quality resources on foundational literacy and
+                                numeracy will be made available on the Digital Infrastructure for Knowledge Sharing
+                                (DIKSHA).</p>
+                        </div>
+                    </div>
+
+                    <div class="conatiner-fluid question mb-3">
+                        <h5 class="display-6 mt-2">1. Present status
+                            in Karnataka
+                        </h5>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" [name]="4" value=0 [(ngModel)]="q1[0].answer">
+                            <label class="form-check-label" for="exampleRadios2">
+                                Satisfactory
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" [name]="4" value=1 [(ngModel)]="q1[0].answer">
+                            <label class="form-check-label" for="exampleRadios2">
+                                Needs Revamp
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" [name]="4" value=2 [(ngModel)]="q1[0].answer">
+                            <label class="form-check-label" for="exampleRadios2">
+                                New Program to be implemeted
+                            </label>
+                        </div>
+
+                        <h5 class="display-6 mt-2">2. Nature of implication
+                        </h5>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="5" value=0 [(ngModel)]="q1[1].answer">
+                            <label class="form-check-label" for="exampleRadios1">
+                                Administrative
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="5" value=1 [(ngModel)]="q1[1].answer">
+                            <label class="form-check-label" for="exampleRadios1">
+                                Pedagogical
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="5" value=2 [(ngModel)]="q1[1].answer">
+                            <label class="form-check-label" for="exampleRadios1">
+                                Other
+                            </label>
+                        </div>
+                        
+                        <div *ngIf="q1[1].answer==2">
+                            <div class="form-group">
+                                <textarea class="form-control"  rows="3" [(ngModel)]="q1[1].textanswer"></textarea>
+                              </div>
+                        </div>
+
+                        <h5 class="display-6 mt-2">3. Implementation Timeline
+                        </h5>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="6" value=0 [(ngModel)]="q1[2].answer">
+                            <label class="form-check-label" for="exampleRadios1">
+                                Short Term
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="6" value=1 [(ngModel)]="q1[2].answer">
+                            <label class="form-check-label" for="exampleRadios1">
+                                Long Term
+                            </label>
+                        </div>
+                        
+                        <div class="form-group">
+                            <!-- <label for="exampleFormControlTextarea1">Suggestions</label> -->
+                            <h5 class="display-6 mt-2">4. Suggestions
+                            </h5>
+                            <textarea class="form-control" id="exampleFormControlTextarea2" rows="3" [(ngModel)]="stq1"></textarea>
+                          </div>
+
+                    </div>
+
+                    
+                    <div class="jumbotron jumbotron-fluid">
+                        <div class="container">
+                            <h1 class="display-7">2.7</h1>
+                            <p class="lead">peer-tutoring will be introduced to promote foundational literacy and
+                                numeracy.</p>
+
+                        </div>
+                    </div>
+                    <div class="conatiner-fluid question mb-3">
+                        <h5 class="display-6 mt-2">1. Present status
+                            in Karnataka
+                        </h5>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="7" value=0 [(ngModel)]="q2[0].answer">
+                            <label class="form-check-label" for="exampleRadios1">
+                                Satisfactory
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="7" value=1 [(ngModel)]="q2[0].answer">
+                            <label class="form-check-label" for="exampleRadios1">
+                                Needs Revamp
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="7" value=2 [(ngModel)]="q2[0].answer">
+                            <label class="form-check-label" for="exampleRadios1">
+                                New Program to be implemeted
+                            </label>
+                        </div>
+
+
+                        <h5 class="display-6 mt-2">2. Nature of implication
+                        </h5>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="8" value=0 [(ngModel)]="q2[1].answer">
+                            <label class="form-check-label" for="exampleRadios1">
+                                Administrative
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="8" value=1 [(ngModel)]="q2[1].answer">
+                            <label class="form-check-label" for="exampleRadios1">
+                                Pedagogical
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="8" value=2 [(ngModel)]="q2[1].answer">
+                            <label class="form-check-label" for="exampleRadios1">
+                                Other
+                            </label>
+                        </div>
+
+                        <div *ngIf="q2[1].answer==2">
+                            <div class="form-group">
+                                <textarea class="form-control"  rows="3" [(ngModel)]="q2[1].textanswer"></textarea>
+                              </div>
+                        </div>
+
+                        <h5 class="display-6 mt-2">3. Implementation Timeline
+                        </h5>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="9" value=0 [(ngModel)]="q2[2].answer">
+                            <label class="form-check-label" for="exampleRadios1">
+                                Short Term
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="9" value=1 [(ngModel)]="q2[2].answer">
+                            <label class="form-check-label" for="exampleRadios1">
+                                Long Term
+                            </label>
+                        </div>
+
+                        <div class="form-group">
+                            <!-- <label for="exampleFormControlTextarea1">Suggestions</label> -->
+                            <h5 class="display-6 mt-2">4. Suggestions
+                            </h5>
+                            <textarea class="form-control" id="exampleFormControlTextarea3" rows="3" [(ngModel)]="stq2"></textarea>
+                          </div>
+                        
+
+                    </div>
+
+
+                    <div class="jumbotron jumbotron-fluid">
+                        <div class="container">
+                            <h1 class="display-7">2.9</h1>
+                            <p class="lead">Children are provided simple but energizing breakfast in addition to midday
+                                meals. All school children shall undergo regular health check-ups especially for 100%
+                                immunization in schools and health cards will be issued to monitor the same.</p>
+
+                        </div>
+                    </div>
+                    <div class="conatiner-fluid question mb-3">
+                        <h5 class="display-6 mt-2">1. Present status
+                            in Karnataka
+                        </h5>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="10" value=0 [(ngModel)]="q3[0].answer">
+                            <label class="form-check-label" for="exampleRadios1">
+                                Satisfactory
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="10" value=1 [(ngModel)]="q3[0].answer">
+                            <label class="form-check-label" for="exampleRadios1">
+                                Needs Revamp
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="10" value=2 [(ngModel)]="q3[0].answer">
+                            <label class="form-check-label" for="exampleRadios1">
+                                New Program to be implemeted
+                            </label>
+                        </div>
+
+
+                        <h5 class="display-6 mt-2">2. Nature of implication
+                        </h5>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="11" value=0 [(ngModel)]="q3[1].answer">
+                            <label class="form-check-label" for="exampleRadios1">
+                                Administrative
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="11" value=1 [(ngModel)]="q3[1].answer">
+                            <label class="form-check-label" for="exampleRadios1">
+                                Pedagogical
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="11" value=2 [(ngModel)]="q3[1].answer">
+                            <label class="form-check-label" for="exampleRadios1">
+                                Other
+                            </label>
+                        </div>
+
+                        <div *ngIf="q3[1].answer==2">
+                            <div class="form-group">
+                                <textarea class="form-control"  rows="3" [(ngModel)]="q3[1].textanswer"></textarea>
+                              </div>
+                        </div>
+
+                        <h5 class="display-6 mt-2">3. Implementation Timeline
+                        </h5>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="12" value=0 [(ngModel)]="q3[2].answer">
+                            <label class="form-check-label" for="exampleRadios1">
+                                Short Term
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="12" value=1 [(ngModel)]="q3[2].answer">
+                            <label class="form-check-label" for="exampleRadios1">
+                                Long Term
+                            </label>
+                        </div>
+
+                        <div class="form-group">
+                            <!-- <label for="exampleFormControlTextarea1">Suggestions</label> -->
+                            <h5 class="display-6 mt-2">4. Suggestions
+                            </h5>
+                            <textarea class="form-control" id="exampleFormControlTextarea4" rows="3" [(ngModel)]="stq3"></textarea>
+                          </div>
+
+                    </div>
+
+                   
+
+                    <button class="btn btn-primary" type="submit" (click)="kickdata()">Finish</button>
+
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

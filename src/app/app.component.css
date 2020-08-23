@@ -1,0 +1,15 @@
+.endl-pag-btn{
+    margin-left:auto;
+}
+.endr-pag-btn{
+    margin-right:auto;
+}
+.display-btn{
+    text-align:  center;
+
+}
+
+.btn:hover{
+    cursor: pointer;
+    color:blue;
+}

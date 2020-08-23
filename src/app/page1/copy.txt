@@ -1,0 +1,432 @@
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { CommService } from '../comm.service'
+import { PageData } from '../shared/pagedata.model'
+import { McqData } from '../shared/mcqdata.model'
+import { RefData } from '../shared/refdata.model'
+import {RespData} from '../shared/respdata.model'
+import {Router} from '@angular/router';
+import {QdbService} from '../admin/services/qdb.service'
+@Component({
+  selector: 'app-page1',
+  templateUrl: './page1.component.html',
+  styleUrls: ['./page1.component.css']
+})
+export class Page1Component implements OnInit {
+
+  constructor(private commservice: CommService,private router: Router,private qdb:QdbService) { }
+  q: McqData[];
+  q1: McqData[];
+  q2: McqData[];
+  stq:string;
+  stq1:string;
+  stq2:string;
+  ngOnInit(): void {
+    this.qdb.getqbytid("1001").subscribe(resp=>console.log(resp));
+    this.commservice.currentpage=2;
+    this.q = [{
+      textanswer: "User Text answer",
+      options: ["Satisfactory", "Needs Revamp", "New program to be implemented"],
+      allowtextanswer: false,
+      question: "Present Status in Karnataka",
+      answer: 0
+    },
+    {
+      textanswer: "User Text answer",
+      options: ["Administrative", "Pedagogical", "Other"],
+      allowtextanswer: false,
+      question: "Nature of Implication",
+      answer: 0
+    },
+    {
+      textanswer: "User Text answer",
+      options: ["Short Term", "Long Term"],
+      allowtextanswer: false,
+      question: "Implementation timeline",
+      answer: 0
+    }]
+    this.q1 = [{
+      textanswer: "User Text answer",
+      options: ["Satisfactory", "Needs Revamp", "New program to be implemented"],
+      allowtextanswer: false,
+      question: "Present Status in Karnataka",
+      answer: 0
+    },
+    {
+      textanswer: "User Text answer",
+      options: ["Administrative", "Pedagogical", "Other"],
+      allowtextanswer: false,
+      question: "Nature of Implication",
+      answer: 0
+    },
+    {
+      textanswer: "User Text answer",
+      options: ["Short Term", "Long Term"],
+      allowtextanswer: false,
+      question: "Implementation timeline",
+      answer: 0
+    }];
+    this.q2 = [{
+      textanswer: "User Text answer",
+      options: ["Satisfactory", "Needs Revamp", "New program to be implemented"],
+      allowtextanswer: false,
+      question: "Present Status in Karnataka",
+      answer: 0
+    },
+    {
+      textanswer: "User Text answer",
+      options: ["Administrative", "Pedagogical", "Other"],
+      allowtextanswer: false,
+      question: "Nature of Implication",
+      answer: 0
+    },
+    {
+      textanswer: "User Text answer",
+      options: ["Short Term", "Long Term"],
+      allowtextanswer: false,
+      question: "Implementation timeline",
+      answer: 0
+    }];
+  }
+
+  kickdata() {
+    let resp1:RespData={
+      mcq:this.q,
+      suggestion:this.stq
+    }
+    let resp2:RespData={
+      mcq:this.q1,
+      suggestion:this.stq1
+    }
+    let resp3:RespData={
+      mcq:this.q2,
+      suggestion:this.stq2
+    }
+    let ref1: RefData = {
+      ref: "1.3",
+      descr: "A National Curricular and Pedagogical Framework for Early Childhood Care and Education (NCPFECCE) for children up to the age of 8 will be developed by NCERT in two parts, namely, a sub-framework for 0-3year-olds, and a sub-framework for 3-8 year-olds",
+      response:resp1
+    };
+    let ref2: RefData = {
+      ref: "1.4",
+      descr: "Special attention and priority will be given to districts and locations that are particularly socio-economically disadvantaged. Would recruit workers/teachers specially trained in the curriculum and pedagogy of ECCE.",
+      response:resp2
+    }
+    let ref3:RefData={
+      ref: "1.7",
+      descr:"new pre-schools will be opened.anganawadis will be linked with with primary education. Current Anganwadi workers/teachers will be trained in accordance with the curricular/pedagogical framework developed by NCERT. Effort will be made for their Continuous Professional Development(CPD).",
+      response:resp3
+    }
+    this.commservice.page1data={
+      topicid:"1001",
+      topicname:"Early Childhood Care & Education (ECCE)",
+      data:[ref1,ref2,ref3]
+    }
+    // let s=this.commservice.surveydata.length;
+    this.commservice.surveydata.survey.push(this.commservice.page1data);
+    this.commservice.currentpage=1;
+    window.scroll(0,0);
+    this.router.navigate(['/page2']);
+  }
+
+
+}
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+<div class="conatiner-fluid mb-3">
+    <div class="row">
+
+        <div class="col-lg-12 col-sm-12 col-md-12">
+
+            <div class="card text-center w-80">
+                <div class="card-body">
+                    <h5 class="card-title">Early Childhood care and Education</h5>
+
+                    <div class="jumbotron jumbotron-fluid">
+                        <div class="container">
+                            <h1 class="display-7">1.3</h1>
+                            <p class="lead">A National Curricular and Pedagogical Framework for Early Childhood Care
+                                and Education (NCPFECCE) for children up to the age of 8 will be developed by NCERT in
+                                two parts, namely, a sub-framework for 0-3
+                                year-olds, and a sub-framework for 3-8 year-olds</p>
+                        </div>
+                    </div>
+                    <div class="conatiner-fluid question mb-3">
+
+                        <h5 class="display-6 mt-2">1. Present status
+                            in Karnataka
+                        </h5>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" [name]="1" value=0 [(ngModel)]="q[0].answer">
+                            <label class="form-check-label" for="exampleRadios1">
+                                Satisfactory
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" [name]="1" value=1 [(ngModel)]="q[0].answer">
+                            <label class="form-check-label" for="exampleRadios1">
+                                Needs Revamp
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" [name]="1" value=2 [(ngModel)]="q[0].answer">
+                            <label class="form-check-label" for="exampleRadios1">
+                                New Program to be implemeted
+                            </label>
+                        </div>
+
+                        <h5 class="display-6 mt-2">2. Nature of implication
+                        </h5>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" [name]="2" value=0 [(ngModel)]="q[1].answer">
+                            <label class="form-check-label" for="exampleRadios1">
+                                Administrative
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" [name]="2" value=1 [(ngModel)]="q[1].answer">
+                            <label class="form-check-label" for="exampleRadios1">
+                                Pedagogical
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" [name]="2" value=2 [(ngModel)]="q[1].answer">
+                            <label class="form-check-label" for="exampleRadios1">
+                                Other
+                            </label>
+                        </div>
+                        <div *ngIf="q[1].answer==2">
+                            <div class="form-group">
+                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" [(ngModel)]="q[1].textanswer"></textarea>
+                              </div>
+                        </div>
+
+                        <h5 class="display-6 mt-2">3. Implementation Timeline
+                        </h5>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" [name]="3" value=0 [(ngModel)]="q[2].answer">
+                            <label class="form-check-label" for="exampleRadios1">
+                                Short Term
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" [name]="3" value=1 [(ngModel)]="q[2].answer">
+                            <label class="form-check-label" for="exampleRadios1">
+                                Long Term
+                            </label>
+                        </div>
+
+                        
+                            <div class="form-group">
+                                <!-- <label for="exampleFormControlTextarea1">Suggestions</label> -->
+                                <h5 class="display-6 mt-2">4. Suggestions
+                                </h5>
+                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" [(ngModel)]="stq"></textarea>
+                              </div>
+                        
+
+
+
+                    </div>
+                    <!-- <button class="btn btn-primary" type="submit" (click)="kickdata()">Submit form</button> -->
+                    <div class="jumbotron jumbotron-fluid">
+                        <div class="container">
+                            <h1 class="display-7">1.4</h1>
+                            <p class="lead">Special attention and priority will be given to districts and locations that
+                                are particularly socio-economically disadvantaged. Would recruit workers/teachers
+                                specially trained in the curriculum and pedagogy of ECCE.
+                        </div>
+                    </div>
+
+                    <div class="conatiner-fluid question mb-3">
+                        <h5 class="display-6 mt-2">1. Present status
+                            in Karnataka
+                        </h5>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" [name]="4" value=0 [(ngModel)]="q1[0].answer">
+                            <label class="form-check-label" for="exampleRadios2">
+                                Satisfactory
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" [name]="4" value=1 [(ngModel)]="q1[0].answer">
+                            <label class="form-check-label" for="exampleRadios2">
+                                Needs Revamp
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" [name]="4" value=2 [(ngModel)]="q1[0].answer">
+                            <label class="form-check-label" for="exampleRadios2">
+                                New Program to be implemeted
+                            </label>
+                        </div>
+
+                        <h5 class="display-6 mt-2">2. Nature of implication
+                        </h5>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="5" value=0 [(ngModel)]="q1[1].answer">
+                            <label class="form-check-label" for="exampleRadios1">
+                                Administrative
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="5" value=1 [(ngModel)]="q1[1].answer">
+                            <label class="form-check-label" for="exampleRadios1">
+                                Pedagogical
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="5" value=2 [(ngModel)]="q1[1].answer">
+                            <label class="form-check-label" for="exampleRadios1">
+                                Other
+                            </label>
+                        </div>
+                         
+                        <div *ngIf="q1[1].answer==2">
+                            <div class="form-group">
+                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" [(ngModel)]="q1[1].textanswer"></textarea>
+                              </div>
+                        </div>
+
+                        <h5 class="display-6 mt-2">3. Implementation Timeline
+                        </h5>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="6" value=0 [(ngModel)]="q1[2].answer">
+                            <label class="form-check-label" for="exampleRadios1">
+                                Short Term
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="6" value=1 [(ngModel)]="q1[2].answer">
+                            <label class="form-check-label" for="exampleRadios1">
+                                Long Term
+                            </label>
+                        </div>
+
+                        
+                            <div class="form-group">
+                                <!-- <label for="exampleFormControlTextarea1">Suggestions</label> -->
+                                <h5 class="display-6 mt-2">4. Suggestions
+                                </h5>
+                                <textarea class="form-control" id="exampleFormControlTextarea2" rows="3" [(ngModel)]="stq1"></textarea>
+                              </div>
+                        
+
+
+                    </div>
+
+
+                    <div class="jumbotron jumbotron-fluid">
+                        <div class="container">
+                            <h1 class="display-7">1.7</h1>
+                            <p class="lead">new pre-schools will be opened.
+                                anganawadis will be linked with with primary education. Current Anganwadi
+                                workers/teachers will be trained in accordance with the curricular/pedagogical framework
+                                developed by NCERT. Effort will be made for their Continuous Professional Development
+                                (CPD).
+
+                        </div>
+                    </div>
+                    <div class="conatiner-fluid question mb-3">
+                        <h5 class="display-6 mt-2">1. Present status
+                            in Karnataka
+                        </h5>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="7" value=0 [(ngModel)]="q2[0].answer">
+                            <label class="form-check-label" for="exampleRadios1">
+                                Satisfactory
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="7" value=1 [(ngModel)]="q2[0].answer">
+                            <label class="form-check-label" for="exampleRadios1">
+                                Needs Revamp
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="7" value=2 [(ngModel)]="q2[0].answer">
+                            <label class="form-check-label" for="exampleRadios1">
+                                New Program to be implemeted
+                            </label>
+                        </div>
+
+
+                        <h5 class="display-6 mt-2">2. Nature of implication
+                        </h5>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="8" value=0 [(ngModel)]="q2[1].answer">
+                            <label class="form-check-label" for="exampleRadios1">
+                                Administrative
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="8" value=1 [(ngModel)]="q2[1].answer">
+                            <label class="form-check-label" for="exampleRadios1">
+                                Pedagogical
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="8" value=2 [(ngModel)]="q2[1].answer">
+                            <label class="form-check-label" for="exampleRadios1">
+                                Other
+                            </label>
+                        </div>
+
+                        <div *ngIf="q2[1].answer==2">
+                            <div class="form-group">
+                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" [(ngModel)]="q2[1].textanswer"></textarea>
+                              </div>
+                        </div>
+
+                        <h5 class="display-6 mt-2">3. Implementation Timeline
+                        </h5>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="9" value=0 [(ngModel)]="q2[2].answer">
+                            <label class="form-check-label" for="exampleRadios1">
+                                Short Term
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="9" value=1 [(ngModel)]="q2[2].answer">
+                            <label class="form-check-label" for="exampleRadios1">
+                                Long Term
+                            </label>
+                        </div>
+                        
+                        
+                        <div class="form-group">
+                            <!-- <label for="exampleFormControlTextarea1">Suggestions</label> -->
+                            <h5 class="display-6 mt-2">4. Suggestions
+                            </h5>
+                            <textarea class="form-control" id="exampleFormControlTextarea3" rows="3" [(ngModel)]="stq2"></textarea>
+                          </div>
+                       
+
+                    </div>
+
+                    <button class="btn btn-primary" type="submit" (click)="kickdata()">Submit</button>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>

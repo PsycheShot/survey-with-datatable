@@ -1,0 +1,18 @@
+<div class="container-fluid mt-3">
+    <nav aria-label="...">
+        <ul class="pagination pagination-sm">
+            <li class="page-item endl-pag-btn"  (click)="pagech($event)" aria-current="page" >
+                <span class="page-link" routerLink="">1</span>
+            </li>
+            <li class="page-item"  (click)="pagech($event)" ><a class="page-link" routerLink="page1">2</a></li>
+            <li class="page-item endr-pag-btn"  id="1" (click)="pagech($event)" ><a class="page-link" routerLink="page2">3</a></li>
+        </ul>
+    </nav>
+    
+</div>
+<div class="container ">
+    <router-outlet></router-outlet>
+</div>
+
+
+<!-- [ngClass]="{'active':pagest==1}" -->

@@ -1,0 +1,12 @@
+.card{
+    margin:auto;
+}
+.display-btn{
+    text-align:  center;
+
+}
+
+.db:hover{
+    cursor: pointer;
+    color:blue;
+}

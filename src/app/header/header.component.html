@@ -1,0 +1,75 @@
+<div class="conatiner-fluid">
+    <div class="row">
+
+        <div class="col-lg-12 col-sm-12 col-md-12">
+            <div class="card text-center w-80">
+                <div class="card-body">
+                    <h5 class="card-title">Contact Details</h5>
+
+                    
+                    <form class="needs-validation" novalidate>
+                      <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                          <label>Name</label>
+                          <input type="text" class="form-control" id="validationCustom01"  placeholder="Name" name="null" [(ngModel)]="name" required>
+                          <!-- <div class="valid-feedback">
+                            Looks good!
+                          </div> -->
+                        </div>
+                        <div class="col-md-6 mb-3">
+                          <label for="validationCustom02">Organisation</label>
+                          <input type="text" class="form-control" id="validationCustom02" placeholder="Organisation" [(ngModel)]="organisation" name="null" required>
+                          <div class="valid-feedback">
+                            Looks good!
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                          <label for="validationCustom03">Responsibility</label>
+                          <input type="text" class="form-control" id="validationCustom03" placeholder="Responsibility" [(ngModel)]="responsibility" name="null" required>
+                          <div class="invalid-feedback">
+                            Please provide a valid city.
+                          </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                          <label for="validationCustom04">E-mail</label>
+                          <input type="email" class="form-control" id="validationCustom04" placeholder="E-Mail" [(ngModel)]="email" name="null" required>
+                          <div class="invalid-feedback">
+                            Please Enter a valid E-mail.
+                          </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                          <label for="validationCustom05">Phone Number</label>
+                          <input type="tel" class="form-control" id="validationCustom05" placeholder="Phone Number" [(ngModel)]="phoneno" name="null" required>
+                          <div class="invalid-feedback">
+                            Please provide a valid zip.
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <button class="btn btn-primary" type="submit" (click)="seedata()">Submit form</button>
+                    </form>
+
+
+                    <!-- <p class="card-text">With supporting text below as a natural lead-in to additional content.</p> -->
+                    <!-- <a href="#" class="btn btn-primary submit-btn">Submit</a> -->
+                </div>
+            </div>
+
+        </div>
+        <div  class="col-lg-12 col-sm-12 col-md-12 mt-3">
+          <div class="card text-white bg-info mb-3" style="max-width: 18rem;">
+            <!-- <div class="card-header">Survey</div> -->
+            <div class="card-body">
+              <h5 class="card-title" style="text-align: center;">Survey</h5>
+              <p class="card-text" style="text-align: center;">This is a survey on the implemetation plan framework for school education</p>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-3 display-btn">
+  <a class="btn db" routerLink="login">Are you Admin?</a>
+</div>

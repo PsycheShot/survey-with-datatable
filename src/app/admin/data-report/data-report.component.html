@@ -1,0 +1,78 @@
+<select class="form-control mt-2" [(ngModel)]="operation" (change)="onClickTop()">
+        <option *ngFor = "let topic of topicName; index as i" value="{{i+1000+1}}">{{topic}}</option>   
+</select>
+
+<div *ngFor = "let topic of topicId">
+    <div *ngIf = "operation==topic">
+        <select class="form-control mt-2" [(ngModel)]="operate" (change)="onClickMiddle()">
+            <option *ngFor = "let refId of ref; index as i" value="{{i}}">Ref ID: {{refId}}</option>   
+        </select>
+    </div>
+</div>
+
+<!-- <div *ngIf = "operation==1002">
+    <select class="form-control mt-2" [(ngModel)]="operate" (change)="onClickMiddle()">
+        <option *ngFor = "let refId of ref; index as i" value="{{i}}">Ref ID: {{refId}}</option>   
+    </select>
+</div> -->
+
+<div *ngFor = "let refId of ref; index as i">
+    <div *ngIf = "operate == ref.indexOf(refId)">
+        <select class="form-control mt-2" [(ngModel)]="oper" (change)="onClickBottom()">
+            <option *ngFor = "let question of questions; index as j" value="{{j}}">Question: {{question}}</option>   
+        </select>
+    </div>
+</div>
+
+<div class="row">    
+    <div *ngIf = "suggestions.length>0" class="col-md-3">
+        <table class="table table-hover table-responsive table-striped " style="margin-top: 60px;">
+            <thead class="thead-dark">
+                <tr>
+                    <th>#</th>
+                    <th>Suggestion</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor = "let suggestion of suggestions; index as i ">
+                    <td>{{i+1}}</td>
+                    <td>{{suggestion}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf = "val==false" class="col-md-3" >
+        <h6 style="margin-top:60px;">No suggestions</h6>
+    </div>
+
+    <div *ngIf="pieChart.dataTable" class="center col-md-5" style="margin-left:20px; margin-right:20px;">
+        <google-chart [data]='pieChart'></google-chart>
+    </div>
+
+    <div *ngIf = "textAnswer.length>0" class="col-md-3">
+        <div>
+            <h5 style="margin-top:30px;">Text answer for option: {{options[2]}}</h5>
+        </div>
+        <table class="table table-hover table-responsive table-striped " style="margin-top: 30px;">
+            <thead class="thead-dark">
+                <tr>
+                    <th>#</th>
+                    <th>TextAnswers</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor = "let text of textAnswer; index as i ">
+                    <td>{{i+1}}</td>
+                    <td>{{text}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf = "val2==false" class="col-md-3" >
+        <h6 style="margin-top:60px;">No TextAnswers</h6>
+    </div>
+
+</div>
+
+
+

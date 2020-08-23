@@ -1,0 +1,58 @@
+<div class="conatiner-fluid">
+    <div class="row">
+
+        <div class="col-lg-12 col-sm-12 col-md-12">
+            <div class="card text-center w-80">
+                <div class="card-body">
+                    <h5 class="card-title">Foundational Literacy and Numeracy </h5>
+
+                    <div *ngFor="let x of q;index as i">
+                        <div class="jumbotron jumbotron-fluid">
+                            <div class="container">
+                                <h1 class="display-7">{{x.ref}}</h1>
+                                <p class="lead">{{x.descr}}</p>
+                            </div>
+                        </div>
+
+                        <div class="conatiner-fluid question mb-3">
+                            <div *ngFor="let y of x.response.mcq;index as j">
+                                <h5 class="display-6 mt-2">{{j+1}}.&nbsp;{{y.question}}
+                                </h5>
+                                <div class="form-check">
+                                    <div *ngFor="let z of y.options;index as k">
+                                        <label class="form-check-label" for="exampleRadios1">
+                                            <input class="form-check-input" type="radio" [name]="x.ref+y.question"
+                                                value={{k}} [(ngModel)]="y.answer">
+                                            {{z}}
+                                        </label>
+
+                                    </div>
+                                </div>
+                                <div *ngIf="y.allowtextanswer==true">
+                                    <div class="form-group">
+                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                                            [(ngModel)]="y.textanswer"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <h5 class="display-6 mt-2">Suggestions
+                                </h5>
+                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                                    [(ngModel)]="x.response.suggestion"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                   
+
+                    <button class="btn btn-primary" type="submit" (click)="kickdata()">Finish</button>
+
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

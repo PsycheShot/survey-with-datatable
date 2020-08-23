@@ -1,0 +1,111 @@
+<select class="form-control mt-2" [(ngModel)]="operation" (change)="wtfh()">
+    <option value="1">Add a Question</option>
+    <option value="2">Delete a question</option>
+    <option value="3">Edit a question</option>
+</select>
+
+<div *ngIf="operation==1">
+    <div class="container mt-5">
+        <h5>Topic ID </h5>
+        <select class="form-control" [(ngModel)]="topicId" (change)="wtfh()">
+            <option value="1001">Early Childhood Care & Education (ECCE)</option>
+            <option value="1002">Foundational Literacy and Numeracy (FLN)</option>
+        </select>
+        <input class="form-control mt-3" type="text" placeholder="Ref #" [(ngModel)]="nref">
+        <div class="form-group">
+            <!-- <label for="exampleFormControlTextarea1">Example textarea</label> -->
+            <textarea class="form-control mt-3" placeholder="Question description" id="exampleFormControlTextarea1"
+                rows="3" [(ngModel)]="ndesc"></textarea>
+        </div>
+        <div class="container-fluid ar-btn">
+            <button class="btn btn-light" (click)="addQ()" >+</button>
+            <button class="btn btn-light ml-2 " (click)="remQ()" >-</button>
+            <div class="row">
+                <div *ngFor="let qry of newQ.questions;index as i">
+                    <div class="card text-center mt-3 mb-3 ml-3 mr-3" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">Question &nbsp; {{i+1}}</h5>
+                            <input class="form-control mb-2" type="text" placeholder="Question"
+                                [(ngModel)]="qry.question">
+                            <button class="btn btn-light mb-3" (click)="addopt(i)">+</button>
+                            <button class="btn btn-light mb-3" (click)="remopt(i)">-</button>
+                            <div *ngFor="let o of qry.options;index as j;trackBy:customTrackBy">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" [(ngModel)]="qry.options[j]"
+                                        placeholder="option {{j+1}}">
+                                </div>
+
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="true" id="gridCheck"
+                                    [(ngModel)]="qry.allowTextAnswer">
+                                <label class="form-check-label" for="gridCheck">
+                                    Add Text box
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-primary mt-3 mb-5" (click)="submit()">Add</button>
+        </div>
+
+
+    </div>
+</div>
+<div *ngIf="operation==2">
+    <div class="container mt-5">
+        <input class="form-control" type="text" placeholder="Enter Ref # of question to delete" [(ngModel)]="qtodelete">
+        <button class="btn btn-primary mt-3 mb-5" (click)="deleteQ()">Delete</button>
+    </div>
+</div>
+<div *ngIf="operation==3">
+    <div class="container mt-5">
+        <input class="form-control" type="text" placeholder="Enter Ref # of question to edit" (keyup.enter)="bringQ()"
+            [(ngModel)]="qtoedit">
+
+        <div class="form-group">
+            <textarea class="form-control mt-3" placeholder="Question description" id="exampleFormControlTextarea1"
+                rows="3" [(ngModel)]="eQ.data['desc']"></textarea>
+        </div>
+
+        <div class="container" style="text-align: center;">
+            <div class="btn btn-light btn-sm mt-2" (click)="eaddQ()">+</div>
+            <div class="btn btn-light btn-sm mt-2" (click)="eremQ()">-</div>
+        </div>
+        <div class="row">
+            <div *ngFor="let qry of eQ.data.questions;index as p">
+                <div class="card text-center mt-3 mb-3 ml-3 mr-3" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Question &nbsp; {{p+1}}</h5>
+                        <input class="form-control mb-2" type="text" placeholder="Question" [(ngModel)]="qry.question">
+                        <small style="color:darkorange">options</small>
+                        <div *ngFor="let o of qry.options;index as j;trackBy:customTrackBy">
+                            <div class="row">
+                                <div class="col-9">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control form-control-sm"
+                                            [(ngModel)]="qry.options[j]" placeholder="option {{j+1}}">
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <button class="btn btn-danger btn-sm" (click)="eremopt(p,j)">del</button>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="btn btn-light btn-sm mt-2" (click)="eaddopt(p)">+</div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="true" id="gridCheck"
+                                [(ngModel)]="qry.allowTextAnswer">
+                            <label class="form-check-label" for="gridCheck">
+                                Add Text box
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="btn btn-primary mt-3 mb-5" (click)="sendalter()">Confirm changes</button>
+    </div>
+</div>
