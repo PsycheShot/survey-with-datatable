@@ -2,12 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {QdbService} from '../services/qdb.service'
 import {Question} from '../shared/question.model'
 import { FormControl } from '@angular/forms'
-<<<<<<< HEAD
-=======
 import {Query} from '../shared/query.model'
 import {QData} from '../shared/qdata.model'
 import {Edata} from '../shared/edata.model'
->>>>>>> repo-a/master
 @Component({
   selector: 'app-qcrud',
   templateUrl: './qcrud.component.html',
@@ -17,20 +14,6 @@ export class QcrudComponent implements OnInit {
 
   constructor(private qdb:QdbService) { }
   operation;
-<<<<<<< HEAD
-  ngOnInit(): void {
-    this.operation=1;
-  }
-  check(){
-  
-    this.qdb.check().subscribe(resp=>console.log(resp))
-    // this.qdb.adddata(mes).subscribe(resp=>console.log(resp))
-  }
-  wtfh(){
-    console.log(this.operation)
-  }
-
-=======
   topicId:string;
   nref:string;
   ndesc:string;
@@ -126,5 +109,4 @@ export class QcrudComponent implements OnInit {
   customTrackBy(index: number, obj: any): any {
     return index;
 }
->>>>>>> repo-a/master
 }
